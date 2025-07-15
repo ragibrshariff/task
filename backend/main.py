@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
+app.mount("/static", StaticFiles(directory="backend/app/static", html=True), name="static")
 
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "db"),
@@ -31,3 +31,6 @@ def get_users():
     cursor.close()
     conn.close()
     return users
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
