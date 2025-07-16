@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/static/',            // 👈 ensures assets resolve correctly when mounted in FastAPI
+  base: '/static/',             // bundle expects to live under /static
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -13,8 +13,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // 👈 optional, if you want shorthand imports like @/App.jsx
+      '@': resolve(__dirname, 'src'),
     },
+  },
+  server: {
+    proxy: { '/api': 'http://localhost:8000' },
   },
 });
 

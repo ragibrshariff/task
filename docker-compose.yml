@@ -22,5 +22,5 @@ services:
       MYSQL_DATABASE: testdb
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+#    volumes:
+#     - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
